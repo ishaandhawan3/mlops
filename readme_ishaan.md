@@ -4,6 +4,36 @@ This project is a comprehensive example of a **Production-Ready MLOps Pipeline**
 
 ---
 
+## 🗺 Project Workflow Flowchart
+
+```mermaid
+graph TD
+    A["🌐 Remote Data Source (GitHub/S3)"] -->|src/load_data.py| B["📁 data/raw/"]
+    B -->|src/split_data.py| C["📁 data/processed/ (Train/Test)"]
+    C -->|src/train.py| D["🧠 Model Training"]
+    D -->|Logs| E["📊 MLflow Tracking"]
+    D -->|Saves| F["💾 models/model.joblib"]
+    C -->|src/evaluate.py| G["📈 Evaluation (Metrics)"]
+    G -->|Reports| H["📄 reports/metrics.json"]
+    F -->|Inference| I["🚀 FastAPI (app.py)"]
+    I -->|Predict| J["🧑‍💻 End User"]
+    
+    subgraph "DVC Pipeline (dvc repro)"
+    B
+    C
+    D
+    G
+    end
+    
+    subgraph "CI/CD (GitHub Actions)"
+    K["Commit & Push"] --> L["Run DVC Pipeline"]
+    L --> M["Validate Model"]
+    M --> N["Deploy API"]
+    end
+```
+
+---
+
 ## ✨ Key Features
 
 -   **Data Versioning with DVC**: Track changes in your dataset just like code.
