@@ -4,6 +4,7 @@ import pandas as pd
 from pydantic import BaseModel, model_validator
 import uvicorn
 import os
+import dotenv 
 
 app = FastAPI()
 
