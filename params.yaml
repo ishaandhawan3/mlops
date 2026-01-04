@@ -1,0 +1,21 @@
+base:
+  project: wine-quality-project
+  random_state: 42
+  target_col: quality
+
+data_source:
+  s3_source: https://raw.githubusercontent.com/aniruddhachoudhury/Red-Wine-Quality/master/winequality-red.csv
+
+load_data:
+  raw_dataset_csv: data/raw/winequality-red.csv
+
+split_data:
+  train_path: data/processed/train_winequality.csv
+  test_path: data/processed/test_winequality.csv
+  test_size: 0.3
+
+estimators:
+  ElasticNet:
+    params:
+      alpha: 0.5
+      l1_ratio: 0.5

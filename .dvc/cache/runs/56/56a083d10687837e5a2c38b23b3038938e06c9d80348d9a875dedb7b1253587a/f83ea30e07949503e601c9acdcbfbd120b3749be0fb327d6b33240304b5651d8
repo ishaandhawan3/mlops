@@ -1,0 +1,19 @@
+cmd: python src/train.py
+deps:
+- path: data/processed/train_winequality.csv
+  hash: md5
+  md5: 703ac0e46571d105248a17ab19a24740
+  size: 66569
+- path: src/train.py
+  hash: md5
+  md5: f12047ae3c5db3f05c646bb628a572c8
+  size: 2449
+params:
+  params.yaml:
+    estimators.ElasticNet.params.alpha: 0.5
+    estimators.ElasticNet.params.l1_ratio: 0.5
+outs:
+- path: models/model.joblib
+  hash: md5
+  md5: d922102d6b97778b064d31f63f454560
+  size: 1136

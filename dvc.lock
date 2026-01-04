@@ -1,0 +1,82 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/load_data.py
+    deps:
+    - path: src/load_data.py
+      hash: md5
+      md5: d0007d324f58c2e0cfe810cd5410e538
+      size: 518
+    params:
+      params.yaml:
+        data_source.s3_source: 
+          https://raw.githubusercontent.com/aniruddhachoudhury/Red-Wine-Quality/master/winequality-red.csv
+    outs:
+    - path: data/raw/winequality-red.csv
+      hash: md5
+      md5: 2d2440983194f97ea8ea940257054caf
+      size: 95085
+  split_data:
+    cmd: python src/split_data.py
+    deps:
+    - path: data/raw/winequality-red.csv
+      hash: md5
+      md5: 2d2440983194f97ea8ea940257054caf
+      size: 95085
+    - path: src/split_data.py
+      hash: md5
+      md5: b327b7b73620e40a15b628e62357d4d9
+      size: 890
+    params:
+      params.yaml:
+        base.random_state: 42
+        split_data.test_size: 0.3
+    outs:
+    - path: data/processed/test_winequality.csv
+      hash: md5
+      md5: 4076ea6a7bf83ae6b5fb78cbb21a5d1a
+      size: 28663
+    - path: data/processed/train_winequality.csv
+      hash: md5
+      md5: 703ac0e46571d105248a17ab19a24740
+      size: 66569
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/train_winequality.csv
+      hash: md5
+      md5: 703ac0e46571d105248a17ab19a24740
+      size: 66569
+    - path: src/train.py
+      hash: md5
+      md5: f12047ae3c5db3f05c646bb628a572c8
+      size: 2449
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.5
+        estimators.ElasticNet.params.l1_ratio: 0.5
+    outs:
+    - path: models/model.joblib
+      hash: md5
+      md5: d922102d6b97778b064d31f63f454560
+      size: 1136
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/test_winequality.csv
+      hash: md5
+      md5: 4076ea6a7bf83ae6b5fb78cbb21a5d1a
+      size: 28663
+    - path: models/model.joblib
+      hash: md5
+      md5: d922102d6b97778b064d31f63f454560
+      size: 1136
+    - path: src/evaluate.py
+      hash: md5
+      md5: 40d51b3e31d0c23616fba3f08dcc8e3f
+      size: 1479
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: e18794abdd4d5eff4db3db6d8c9ec959
+      size: 99

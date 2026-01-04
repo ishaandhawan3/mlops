@@ -1,0 +1,19 @@
+cmd: python src/evaluate.py
+deps:
+- path: data/processed/test_winequality.csv
+  hash: md5
+  md5: 4076ea6a7bf83ae6b5fb78cbb21a5d1a
+  size: 28663
+- path: models/model.joblib
+  hash: md5
+  md5: d922102d6b97778b064d31f63f454560
+  size: 1136
+- path: src/evaluate.py
+  hash: md5
+  md5: 40d51b3e31d0c23616fba3f08dcc8e3f
+  size: 1479
+outs:
+- path: reports/metrics.json
+  hash: md5
+  md5: e18794abdd4d5eff4db3db6d8c9ec959
+  size: 99

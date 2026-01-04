@@ -1,0 +1,15 @@
+cmd: python src/load_data.py
+deps:
+- path: src/load_data.py
+  hash: md5
+  md5: d0007d324f58c2e0cfe810cd5410e538
+  size: 518
+params:
+  params.yaml:
+    data_source.s3_source: 
+      https://raw.githubusercontent.com/aniruddhachoudhury/Red-Wine-Quality/master/winequality-red.csv
+outs:
+- path: data/raw/winequality-red.csv
+  hash: md5
+  md5: 2d2440983194f97ea8ea940257054caf
+  size: 95085

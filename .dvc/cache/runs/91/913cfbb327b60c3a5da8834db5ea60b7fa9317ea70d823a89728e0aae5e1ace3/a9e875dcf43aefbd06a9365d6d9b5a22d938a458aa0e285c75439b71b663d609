@@ -1,0 +1,23 @@
+cmd: python src/split_data.py
+deps:
+- path: data/raw/winequality-red.csv
+  hash: md5
+  md5: 2d2440983194f97ea8ea940257054caf
+  size: 95085
+- path: src/split_data.py
+  hash: md5
+  md5: b327b7b73620e40a15b628e62357d4d9
+  size: 890
+params:
+  params.yaml:
+    base.random_state: 42
+    split_data.test_size: 0.3
+outs:
+- path: data/processed/test_winequality.csv
+  hash: md5
+  md5: 4076ea6a7bf83ae6b5fb78cbb21a5d1a
+  size: 28663
+- path: data/processed/train_winequality.csv
+  hash: md5
+  md5: 703ac0e46571d105248a17ab19a24740
+  size: 66569
